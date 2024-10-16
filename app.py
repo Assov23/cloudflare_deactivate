@@ -10,6 +10,7 @@ from tools.hatcloud import run_hatcloud
 from tools.maryam import run_maryam
 from tools.cloudunflare import run_cloudunflare
 from tools.bypass_firewall import run_bypass_firewall
+from tools.orsframe_work import run_osrframework
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -22,7 +23,8 @@ async def execute_tool(choice, target):
             4: run_hatcloud,
             5: run_maryam,
             6: run_cloudunflare,
-            7: run_bypass_firewall
+            7: run_bypass_firewall,
+            8: run_osrframework
         }
         logging.info(f"Запуск {tools_dict[choice].__name__} для {target}")
         await tools_dict[choice](target, output_to_file=True)
@@ -43,7 +45,8 @@ async def main():
         4: "HatCloud (выяснить реальный IP)",
         5: "Maryam (сбор информации по домену)",
         6: "CloudUnflare (Bash-скрипт)",
-        7: "BypassFirewall (пытается найти реальный IP)"
+        7: "BypassFirewall (пытается найти реальный IP)",
+        8: "OSRFramework (сбор информации по домену)"
     }
 
     while True:
