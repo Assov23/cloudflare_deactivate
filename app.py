@@ -11,6 +11,7 @@ from tools.maryam import run_maryam
 from tools.cloudunflare import run_cloudunflare
 from tools.bypass_firewall import run_bypass_firewall
 from tools.orsframe_work import run_osrframework
+from tools.catphish import run_catphish 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -24,7 +25,8 @@ async def execute_tool(choice, target):
             5: run_maryam,
             6: run_cloudunflare,
             7: run_bypass_firewall,
-            8: run_osrframework
+            8: run_osrframework,
+            9: run_catphish
         }
         logging.info(f"Запуск {tools_dict[choice].__name__} для {target}")
         await tools_dict[choice](target, output_to_file=True)
@@ -46,7 +48,8 @@ async def main():
         5: "Maryam (сбор информации по домену)",
         6: "CloudUnflare (Bash-скрипт)",
         7: "BypassFirewall (пытается найти реальный IP)",
-        8: "OSRFramework (сбор информации по домену)"
+        8: "OSRFramework (сбор информации по домену)",
+        9: "Catphish (сбор информации по домену)"
     }
 
     while True:
