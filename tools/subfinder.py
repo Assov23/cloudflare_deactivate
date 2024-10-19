@@ -17,11 +17,12 @@ async def run_subfinder(target: str, silent: bool = True, output_to_file: bool =
     :type output_to_file: bool
     """
     try:
-        command = ["subfinder", "-d", target]
+        command = ["/home/ubuntu/go/bin/subfinder", "-d", target]
         if silent:
             command.append("-silent")
-        
+        logging.info(f"{command}")
         logging.info(f"Запуск subfinder для {target}")
+        
         result = await asyncio.create_subprocess_exec(
             *command,
             stdout=subprocess.PIPE,
@@ -35,10 +36,6 @@ async def run_subfinder(target: str, silent: bool = True, output_to_file: bool =
 
         if result.returncode == 0:
             subdomains = stdout_str.splitlines()
-            logging.info(f"Найденные поддомены для {target}:")
-            for subdomain in subdomains:
-                logging.info(subdomain)
-            
             if output_to_file:
                 file_name = f"{target}_subdomains_{os.urandom(4).hex()}.txt"
                 with open(file_name, "w") as f:
@@ -60,3 +57,4 @@ def run_subfinder_sync(target: str, silent: bool = True, output_to_file: bool = 
         return
     
     asyncio.run(run_subfinder(target, silent, output_to_file))
+
